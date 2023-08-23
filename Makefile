@@ -1,4 +1,4 @@
-.PHONY: db-reset db-migrate db-rollback db-refresh db-creat
+.PHONY: db-reset db-migrate db-rollback db-refresh db-create
 
 # database drop and create
 db-reset:
