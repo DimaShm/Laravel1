@@ -13,12 +13,12 @@ class ProductFactory extends Factory
     {
         return [
             'ext_product_id' => $this->faker->numberBetween(1000, 9999),
-            'category_id' => Category::all()->random()->id,             'name' => $this->faker->word,
+            'category_id' => Category::all()->random()->id,
+            'name' => $this->faker->word,
             'description' => $this->faker->text,
             'price' => $this->faker->numberBetween(0, 1000000),
             'old_price' => $this->faker->numberBetween(0, 1000000),
             'stock' => $this->faker->randomElement([0, 1]),
-//        $table->foreignId('category_id')->constrained('categories');
         ];
     }
 }
