@@ -11,7 +11,7 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word, // Генерация случайного слова
+            'name' => $this->faker->word,
         ];
     }
 }

@@ -1,6 +1,11 @@
-.PHONY: db-reset db-migrate db-rollback db-refresh
+.PHONY: db-reset db-migrate db-rollback db-refresh db-creat
 
-#start migration
+# database drop and create
+db-reset:
+	php artisan db:drop
+	php artisan db:create
+
+#start the database migration
 db-migrate:
 	php artisan migrate
 
@@ -8,14 +13,8 @@ db-migrate:
 db-rollback:
 	php artisan migrate:rollback
 
-#rollback for all migrations
-db-reset:
-	php artisan migrate:reset
+#db-reset and db-migrate
+db-refresh: db-reset db-migrate
 
-#rollback for all migrations and start new migration
-db-refresh:
-	php artisan migrate:refresh
-
-db-create:
-	$(MAKE) db-refresh
+db-create: db-refresh
 	php artisan db:seed
