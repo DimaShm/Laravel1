@@ -25,6 +25,13 @@ class Dbdrop extends Command
             return;
         }
 
+        try {
+            DB::connection()->getPdo()->exec("USE $schemaName");
+        } catch (\Exception $e) {
+            $this->info("Database '$schemaName' does not exist.");
+            return;
+        }
+
         $query = "DROP DATABASE IF EXISTS $schemaName;";
 
         DB::statement($query);
