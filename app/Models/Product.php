@@ -18,42 +18,44 @@ class Product extends Model
     ];
     public function createRecord(CreateDto $dto)
     {
+
         return $this->create([
-            'ext_product_id' => $dto->ext_product_id,
-            'category_id' => $dto->category_id,
+            'ext_product_id' => $dto->productId,
+            'category_id' => $dto->categoryId,
             'name' => $dto->name,
             'description' => $dto->description,
             'price' => $dto->price,
-            'old_price' => $dto->old_price,
+            'old_price' => $dto->oldPrice,
             'stock' => $dto->stock,
         ]);
     }
 
     public function readRecord(ReadDto $dto)
     {
-        $product = Product::find($dto->productId);
+        $product = Product::where('ext_product_id', $dto->productId)->first();
+
         return $product;
     }
 
     public function updateRecord(UpdateDto $dto): bool
     {
-        $product = Product::find($dto->id);
-
+        $product = Product::where('ext_product_id', $dto->productId)->first();
         if ($product) {
+
             return $product->update([
                 'name' => $dto->name,
                 'description' => $dto->description,
                 'price' => $dto->price,
-                'old_price' => $dto->old_price,
+                'old_price' => $dto->oldPrice,
                 'stock' => $dto->stock,
             ]);
         }
+
         return false;
     }
 
     public function deleteRecord(DeleteDto $dto): bool
     {
-        $deleted = $this->destroy($dto->productId);
-        return (bool)$deleted;
+        return Product::where('ext_product_id', $dto->productId)->delete();
     }
 }

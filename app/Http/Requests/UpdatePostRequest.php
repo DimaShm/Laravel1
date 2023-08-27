@@ -23,8 +23,9 @@ class UpdatePostRequest extends FormRequest
 
     public function rules(): array
     {
+
         return [
-            'productId' => 'required|integer|min:0|max:1000|exists:products,id',
+            'productId' => 'required|integer|min:1000|max:9999|exists:products,ext_product_id',
             'productName' => 'required|string|min:2|max:255',
             'description' => 'required|string|min:2|max:1000',
             'price' => 'required|integer|min:0|max:1000000',
@@ -35,6 +36,7 @@ class UpdatePostRequest extends FormRequest
 
     public function messages(): array
     {
+
         return [
             'productId.exists' => 'Product with this id not found',
             'productId.required' => 'You need input the product id',

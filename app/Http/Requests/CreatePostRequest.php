@@ -22,11 +22,9 @@ class CreatePostRequest extends FormRequest
 
     public function rules(): array
     {
-        Validator::extend('unique_product_id', function ($attribute, $value, $parameters, $validator) {
-            return !DB::table('products')->where('ext_product_id', $value)->exists();
-        });
+
         return [
-            'productId' => 'required|integer|min:1000|max:9999|unique_product_id',
+            'productId' => 'required|integer|min:1000|max:9999|unique:products,ext_product_id',
             'categoryId' => 'required|integer|min:0|max:100|exists:products,category_id',
             'productName' => 'required|string|min:2|max:255',
             'description' => 'required|string|min:2|max:1000',
@@ -53,6 +51,7 @@ class CreatePostRequest extends FormRequest
 
     public function getDto(): CreateDto
     {
+
         return new CreateDto(
             $this->post('productId'),
             $this->post('categoryId'),

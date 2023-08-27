@@ -63,15 +63,9 @@
     </div>
 @endif
 
-@if(session('success'))
+@if(isset($success))
     <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
+        {{ $success }}
     </div>
 @endif
 
