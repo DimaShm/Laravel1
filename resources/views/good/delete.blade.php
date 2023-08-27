@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-    <title>Read Page</title>
+    <title>Delete Page</title>
 </head>
-
 <body>
 <header>
-    <h1>CRUD Actions - Read</h1>
+    <h1>CRUD Actions - Delete</h1>
 </header>
 
 <nav>
@@ -20,13 +19,13 @@
     <a href="{{ route('delete') }}">Delete</a>
 </nav>
 
-<form action="{{ route('read.action') }}" method="post">
+<form action="{{ route('delete.action') }}" method="post">
     @csrf
     @method('POST')
-    <h1>Enter product ID</h1><br>
     <label for="productId">product ID:</label>
-    <input type="number" id="productId" name="productId" required><br>
-    <button type="submit">Read</button><br>
+    <input type="number" id="productId" name="productId"><br>
+
+    <button type="submit">Delete</button>
 </form>
 
 @if($errors->any())
@@ -39,24 +38,12 @@
     </div>
 @endif
 
-@if(session('success') && isset(session('success')['name']))
+@if(isset($success))
     <div class="alert alert-success">
-        <ul>
-           <li>Name: {{ session('success')['name'] }}</li>
-           <li>Category ID: {{ session('success')['category_id'] }}</li>
-           <li>Description: {{ session('success')['description'] }}</li>
-           <li>Price: {{ session('success')['price'] }}</li>
-           <li>Old price: {{ session('success')['old_price'] }}</li>
-           <li>Stock: {{ session('success')['stock'] == 0 ? 'No' : 'Yes' }}</li>
-        </ul>
-    </div>
-@endif
-
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
+        {{ $success }}
     </div>
 @endif
 
 </body>
 </html>
+
