@@ -18,7 +18,7 @@
     </nav>
     <div class='register_button_box'>
         <h2>For more actions please register</h2>
-        <a href="{{ route('register') }}">
+{{--        <a href="{{ route('register') }}">--}}
             <button>
                 Register
             </button>
@@ -27,3 +27,4 @@
 </body>
 
 </html>
+

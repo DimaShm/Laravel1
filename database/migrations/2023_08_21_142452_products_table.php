@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->integer('ext_product_id');
             $table->foreignId('category_id')->constrained('categories');
             $table->string('name');
@@ -21,6 +20,7 @@ return new class extends Migration
             $table->integer('price');
             $table->integer('old_price');
             $table->boolean('stock');
+            $table->timestamps();
         });
     }
 

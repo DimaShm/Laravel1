@@ -24,13 +24,10 @@ Route::view('delete', 'crud.delete')->name('delete');
 Route::view('register', 'register.index')->name('register');
 Route::view('login', 'login.index')->name('login');
 
-
-//Route::prefix('good')->group(callback: function () {
-//    Route::get('/create', [GoodController::class, 'create'])->name('create');
-//    Route::get('/read', [GoodController::class, 'show'])->name('read');
-//    Route::get('/update', [GoodController::class, 'update'])->name('update');
-//    Route::get('/delete', [GoodController::class, 'destroy'])->name('delete');
-//});
+Route::post('create', [GoodController::class, 'create'])->name('create.action');
+Route::post('read', [GoodController::class, 'read'])->name('read.action');
+Route::post('update', [GoodController::class, 'update'])->name('update.action');
+Route::post('delete', [GoodController::class, 'delete'])->name('delete.action');
 
 
 

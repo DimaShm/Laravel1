@@ -91,3 +91,19 @@ div {
     display: flex;
     align-items: center;
     width: 500px;
+}
+
+.alert {
+    display: flex;
+    padding-left: 50px;
+    margin-bottom: 50px;
+    width: 600px;
+}
+
+.alert-danger {
+    color: red;
+}
+
+.alert-success {
+    color: blue;
+}

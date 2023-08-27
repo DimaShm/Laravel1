@@ -19,5 +19,38 @@
     <a href="{{ route('delete') }}">Delete</a>
 </nav>
 
+<form action="{{ route('delete.action') }}" method="post">
+    @csrf
+    @method('POST')
+    <label for="productId">product ID:</label>
+    <input type="number" id="productId" name="productId"><br>
+
+    <button type="submit">Delete</button>
+</form>
+
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if(session('success') && !isset(session('success')['name']))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error') && !isset(session('success')['name']))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
+
 </body>
 </html>
+
