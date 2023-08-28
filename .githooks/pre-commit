@@ -1,3 +1,3 @@
 #!/bin/bash
 
-make code-fix-test
+make code-fix-changed
