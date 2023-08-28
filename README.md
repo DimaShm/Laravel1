@@ -12,3 +12,9 @@ Install the application:
 make composer-install db-create
 ```
 
+Init git hooks:
+
+```shell
+make init-githooks
+```
+

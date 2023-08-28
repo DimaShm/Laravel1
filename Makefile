@@ -6,6 +6,9 @@ up: ## Create and start the services
 build: ## Build or rebuild the services
 	docker compose build --pull --no-cache
 
+init-githooks: ## initialize githooks: pre-commit
+	git config core.hooksPath .githooks
+
 composer-install: ## Install the dependencies
 	docker compose exec php sh -lc 'composer install'
 
