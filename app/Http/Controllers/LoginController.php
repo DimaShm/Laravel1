@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
-
 use App\Http\Requests\LoginPostRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +29,6 @@ class LoginController extends Controller
     {
         Auth::logout();
 
-        // После выполнения логоута, вы можете выполнить перенаправление на нужную страницу
-        return redirect('/'); // Например, перенаправление на главную страницу
+        return redirect('/');
     }
 }
