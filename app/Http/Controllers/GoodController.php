@@ -32,7 +32,7 @@ class GoodController extends Controller
         return view('good.create')->with($message);
     }
 
-    public function read(ReadPostRequest $request): View
+    public function show(ReadPostRequest $request): View
     {
         $dto = $request->getDto();
         $readProduct = $this->product->readRecord($dto);
@@ -60,7 +60,7 @@ class GoodController extends Controller
 
         return view('good.update')->with($message);
     }
-    public function delete(DeletePostRequest $request): View
+    public function destroy(DeletePostRequest $request): View
     {
         $dto = $request->getDto();
         $deletedProduct = $this->product->deleteRecord($dto);

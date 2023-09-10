@@ -12,16 +12,17 @@
 </header>
 
 <nav>
-    <a href="{{ route('home') }}">HOME</a>
+    <a href="{{ route('user.private') }}">HOME</a>
     <a href="{{ route('create') }}">Create</a>
     <a href="{{ route('read') }}">Read</a>
     <a href="{{ route('update') }}">Update</a>
-    <a href="{{ route('delete') }}">Delete</a>
+    @if (Auth::user()->role == 'admin')
+        <a href="{{ route('delete') }}">Delete</a>
+    @endif
 </nav>
 
 <form action="{{ route('delete.action') }}" method="post">
     @csrf
-    @method('POST')
     <label for="productId">product ID:</label>
     <input type="number" id="productId" name="productId"><br>
 

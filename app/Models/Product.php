@@ -14,11 +14,17 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'ext_product_id', 'category_id', 'name', 'description', 'price', 'old_price', 'stock'
+        'ext_product_id',
+        'category_id',
+        'name',
+        'description',
+        'price',
+        'old_price',
+        'stock'
     ];
-    public function createRecord(CreateDto $dto)
-    {
 
+    public function createRecord(CreateDto $dto): ?Product
+    {
         return $this->create([
             'ext_product_id' => $dto->productId,
             'category_id' => $dto->categoryId,
@@ -30,7 +36,7 @@ class Product extends Model
         ]);
     }
 
-    public function readRecord(ReadDto $dto)
+    public function readRecord(ReadDto $dto): ?Product
     {
         $product = Product::where('ext_product_id', $dto->productId)->first();
 
@@ -40,18 +46,13 @@ class Product extends Model
     public function updateRecord(UpdateDto $dto): bool
     {
         $product = Product::where('ext_product_id', $dto->productId)->first();
-        if ($product) {
-
-            return $product->update([
-                'name' => $dto->name,
-                'description' => $dto->description,
-                'price' => $dto->price,
-                'old_price' => $dto->oldPrice,
-                'stock' => $dto->stock,
-            ]);
-        }
-
-        return false;
+        return $product->update([
+            'name' => $dto->name,
+            'description' => $dto->description,
+            'price' => $dto->price,
+            'old_price' => $dto->oldPrice,
+            'stock' => $dto->stock,
+        ]);
     }
 
     public function deleteRecord(DeleteDto $dto): bool

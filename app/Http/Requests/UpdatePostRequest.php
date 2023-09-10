@@ -2,28 +2,13 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Dto\CreateDto;
 use App\Http\Dto\UpdateDto;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
-class UpdatePostRequest extends FormRequest
+class UpdatePostRequest extends AppFormRequest
 {
-
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-
-        return true;
-    }
-
     public function rules(): array
     {
-
         return [
             'productId' => 'required|integer|min:1000|max:9999|exists:products,ext_product_id',
             'productName' => 'required|string|min:2|max:255',
@@ -36,7 +21,6 @@ class UpdatePostRequest extends FormRequest
 
     public function messages(): array
     {
-
         return [
             'productId.exists' => 'Product with this id not found',
             'productId.required' => 'You need input the product id',
@@ -50,7 +34,6 @@ class UpdatePostRequest extends FormRequest
 
     public function getDto(): UpdateDto
     {
-
         return new UpdateDto(
             $this->post('productId'),
             $this->post('productName'),
