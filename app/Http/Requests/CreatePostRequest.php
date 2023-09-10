@@ -3,26 +3,11 @@
 namespace App\Http\Requests;
 
 use App\Http\Dto\CreateDto;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
-class CreatePostRequest extends FormRequest
+class CreatePostRequest extends AppFormRequest
 {
-
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-
-        return true;
-    }
-
     public function rules(): array
     {
-
         return [
             'productId' => 'required|integer|min:1000|max:9999|unique:products,ext_product_id',
             'categoryId' => 'required|integer|min:0|max:100|exists:products,category_id',
@@ -51,7 +36,6 @@ class CreatePostRequest extends FormRequest
 
     public function getDto(): CreateDto
     {
-
         return new CreateDto(
             $this->post('productId'),
             $this->post('categoryId'),

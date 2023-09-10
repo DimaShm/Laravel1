@@ -14,16 +14,17 @@
         <a href="{{ route('create') }}">Create</a>
         <a href="{{ route('read') }}">Read</a>
         <a href="{{ route('update') }}">Update</a>
-        <a href="{{ route('delete') }}">Delete</a>
+        @if (Auth::user()->role == 'admin')
+            <a href="{{ route('delete') }}">Delete</a>
+        @endif
     </nav>
-    <div class='register_button_box'>
-        <h2>For more actions please register</h2>
-{{--        <a href="{{ route('register') }}">--}}
-            <button>
-                Register
-            </button>
-        </a>
-   </div>
+
+
+<h2>Hi, {{ Auth::user()->name }}</h2>
+<br><br>
+
+<a href="{{ route('logout') }}">Log out</a>
+
 </body>
 
 </html>

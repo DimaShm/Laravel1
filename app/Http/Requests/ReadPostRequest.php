@@ -5,22 +5,10 @@ namespace App\Http\Requests;
 use App\Http\Dto\ReadDto;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ReadPostRequest extends FormRequest
+class ReadPostRequest extends AppFormRequest
 {
-
-
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-
-        return true;
-    }
-
       public function rules(): array
     {
-
         return [
             'productId' => 'required|integer|min:1000|max:9999|exists:products,ext_product_id',
         ];
@@ -28,7 +16,6 @@ class ReadPostRequest extends FormRequest
 
     public function messages(): array
     {
-
         return [
             'productId.exists' => 'Product with this id was not found',
             'productId.required' => 'You need input the product id'
@@ -37,7 +24,6 @@ class ReadPostRequest extends FormRequest
 
     public function getDto(): ReadDto
     {
-
         return new ReadDto(
             $this->post('productId')
         );
