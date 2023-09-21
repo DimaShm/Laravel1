@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CreateProductException;
+use App\Exceptions\DeleteProductException;
+use App\Exceptions\ReadProductException;
+use App\Exceptions\UpdateProductException;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\DeletePostRequest;
 use App\Http\Requests\ReadPostRequest;
@@ -23,13 +27,11 @@ class GoodController extends Controller
         $dto = $request->getDto();
         $createdProduct = $this->product->createRecord($dto);
 
-        if ($createdProduct) {
-            $message = ['success' => 'The new product was created'];
-        } else {
-            $message = ['error' => 'Failed to create product'];
+        if (!$createdProduct) {
+            throw new CreateProductException();
         }
 
-        return view('good.create')->with($message);
+        return view('good.create', ['success' => 'The new product was created']);
     }
 
     public function show(ReadPostRequest $request): View
@@ -37,39 +39,34 @@ class GoodController extends Controller
         $dto = $request->getDto();
         $readProduct = $this->product->readRecord($dto);
 
-        if ($readProduct) {
-            $message = ['success' => $readProduct];
-        } else {
-            $message = ['error' => 'Failed to reading product'];
+        if (!$readProduct) {
+            throw new ReadProductException();
         }
 
-        return view('good.read')->with($message);
+        return view('good.read', ['success' => $readProduct]);
     }
 
     public function update(UpdatePostRequest $request): View
     {
         $dto = $request->getDto();
-
         $updatedProduct = $this->product->updateRecord($dto);
 
-        if ($updatedProduct) {
-            $message = ['success' => 'The product was updated'];
-        } else {
-            $message = ['error' => 'Failed to update product'];
+        if (!$updatedProduct) {
+            throw new UpdateProductException();
         }
 
-        return view('good.update')->with($message);
+        return view('good.update', ['success' => 'The product was updated']);
     }
+
     public function destroy(DeletePostRequest $request): View
     {
         $dto = $request->getDto();
         $deletedProduct = $this->product->deleteRecord($dto);
-        if ($deletedProduct) {
-            $message = ['success' => "Successfully deleting data with id {$dto->productId}"];
-        } else {
-            $message = ['error' => "Failed to delete data with id {$dto->productId}"];
+
+        if (!$deletedProduct) {
+            throw new DeleteProductException();
         }
 
-        return view('good.delete')->with($message);
+        return view('good.delete', ['success' => "Successfully deleting data with id {$dto->productId}"]);
     }
 }

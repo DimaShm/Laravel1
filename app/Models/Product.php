@@ -8,6 +8,7 @@ use App\Http\Dto\ReadDto;
 use App\Http\Dto\UpdateDto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Product extends Model
 {
@@ -36,9 +37,13 @@ class Product extends Model
         ]);
     }
 
-    public function readRecord(ReadDto $dto): ?Product
+    public function readRecord(ReadDto $dto): Product
     {
         $product = Product::where('ext_product_id', $dto->productId)->first();
+
+        if (null === $product) {
+            throw new ModelNotFoundException();
+        }
 
         return $product;
     }
@@ -46,6 +51,11 @@ class Product extends Model
     public function updateRecord(UpdateDto $dto): bool
     {
         $product = Product::where('ext_product_id', $dto->productId)->first();
+
+        if (null === $product) {
+            throw new ModelNotFoundException();
+        }
+
         return $product->update([
             'name' => $dto->name,
             'description' => $dto->description,
@@ -57,6 +67,12 @@ class Product extends Model
 
     public function deleteRecord(DeleteDto $dto): bool
     {
-        return Product::where('ext_product_id', $dto->productId)->delete();
+        $product = Product::where('ext_product_id', $dto->productId)->first();
+
+        if (null === $product) {
+            throw new ModelNotFoundException();
+        }
+
+        return $product->delete();
     }
 }

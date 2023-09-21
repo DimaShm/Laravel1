@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Dto\DeleteDto;
-use Illuminate\Foundation\Http\FormRequest;
 
 class DeletePostRequest extends AppFormRequest
 {

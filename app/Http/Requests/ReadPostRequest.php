@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Http\Dto\ReadDto;
-use Illuminate\Foundation\Http\FormRequest;
 
 class ReadPostRequest extends AppFormRequest
 {

@@ -12,7 +12,7 @@
 </header>
 
 <nav>
-    <a href="{{ route('user.private') }}">HOME</a>
+    <a href="{{ route('index') }}">HOME</a>
     <a href="{{ route('create') }}">Create</a>
     <a href="{{ route('read') }}">Read</a>
     <a href="{{ route('update') }}">Update</a>
@@ -54,6 +54,12 @@
 
     <button type="submit">Update</button>
 </form>
+
+@if(isset($error))
+    <div class="alert alert-danger">
+        {{ $error }}
+    </div>
+@endif
 
 @if($errors->any())
     <div class="alert alert-danger">

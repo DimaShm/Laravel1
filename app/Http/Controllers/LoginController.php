@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginPostRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,14 +11,11 @@ class LoginController extends Controller
 {
     public function authenticate(LoginPostRequest $request): RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required'],
-            'password' => ['required'],
-        ]);
-        if (Auth::attempt($credentials)) {
+        $dto = $request->getDto();
+        if (Auth::attempt((array)$dto)) {
             $request->session()->regenerate();
 
-            return redirect(route('user.private'));
+            return redirect(route('index'));
         }
 
         return back()->withErrors([
