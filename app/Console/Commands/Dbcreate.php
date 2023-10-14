@@ -29,5 +29,6 @@ class Dbcreate extends Command
 
         config(["database.connections.mysql.database" => $schemaName]);
 
+        $this->info("Database '$schemaName' has been created.");
     }
 }

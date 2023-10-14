@@ -1,4 +1,20 @@
-#For start project use: php artisan serve
+### Getting started
 
-#For to filling tables "categories" and "products" with fake data 
-#use: make db-create
+Build and start the services:
+
+```shell
+make build up
+```
+
+Install the application:
+
+```shell
+make composer-install db-create
+```
+
+Init git hooks:
+
+```shell
+make init-githooks
+```
+
