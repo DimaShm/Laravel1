@@ -12,13 +12,13 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'ext_product_id' => $this->faker->numberBetween(1000, 9999),
+            'ext_product_id' => fake()->unique()->numberBetween(1000, 9999),
             'category_id' => Category::all()->random()->id,
-            'name' => $this->faker->word,
-            'description' => $this->faker->text,
-            'price' => $this->faker->numberBetween(0, 1000000),
-            'old_price' => $this->faker->numberBetween(0, 1000000),
-            'stock' => $this->faker->randomElement([0, 1]),
+            'name' => fake()->word,
+            'description' => fake()->text,
+            'price' => fake()->numberBetween(0, 1000000),
+            'old_price' => fake()->numberBetween(0, 1000000),
+            'stock' => fake()->randomElement([0, 1]),
         ];
     }
 }

@@ -1,37 +1,17 @@
 <?php
 
-use App\Http\Controllers\GoodController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+//public routes
+Route::view('/', 'index')-> name('index');
+Route::view('login', 'login')->name('login');
+Route::view('register', 'register')->name('register');
+Route::view('private', 'private')->name('private');
 
-Route::view('/', 'home.index')-> name('home');
-
-Route::view('create', 'crud.create')->name('create');
-Route::view('read', 'crud.read')->name('read');
-Route::view('update', 'crud.update')->name('update');
-Route::view('delete', 'crud.delete')->name('delete');
-
-Route::view('register', 'register.index')->name('register');
-Route::view('login', 'login.index')->name('login');
-
-
-//Route::prefix('good')->group(callback: function () {
-//    Route::get('/create', [GoodController::class, 'create'])->name('create');
-//    Route::get('/read', [GoodController::class, 'show'])->name('read');
-//    Route::get('/update', [GoodController::class, 'update'])->name('update');
-//    Route::get('/delete', [GoodController::class, 'destroy'])->name('delete');
-//});
-
-
-
-
+// Authenticated routes
+Route::prefix('good')->group(function () {
+    Route::view('create', 'good.create')->name('create');
+    Route::view('read', 'good.read')->name('read');
+    Route::view('update', 'good.update')->name('update');
+    Route::view('delete', 'good.delete')->name('delete');
+})->middleware('auth');

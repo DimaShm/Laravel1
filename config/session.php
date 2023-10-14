@@ -18,7 +18,8 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => env('SESSION_DRIVER', 'api'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -197,5 +198,4 @@ return [
     */
 
     'same_site' => 'lax',
-
 ];
